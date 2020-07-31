@@ -20,6 +20,8 @@
 	
 	QuestionDao quest = (QuestionDao)cont.getAttribute("Question");
 	ArrayList<question> arr = quest.getAllQuestion(con);
+	
+	request.getSession().setAttribute("currQuiz", arr);
 %>
 
 <title>My Quiz</title>
