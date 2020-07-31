@@ -51,16 +51,11 @@
 			
 		</form>
 		
+		<h1>
+			<a href="/WebQuizProject/quiz.jsp"> Write test </a>
+		</h1>
+		
 		<%
-		
-		for(int i=0; i<arr.size(); i++){
-			%>
-			
-			<h1><%= arr.get(i).getTitle() %></h1>
-			
-			<%
-		}
-		
 		
 	} else{
 		%>

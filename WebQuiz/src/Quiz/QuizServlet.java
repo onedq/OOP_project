@@ -1,6 +1,9 @@
 package Quiz;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +14,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class QuizServlet
  */
-@WebServlet("/QuizServlet")
+@WebServlet("/Quiz/QuizServlet")
 public class QuizServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -41,6 +44,7 @@ public class QuizServlet extends HttpServlet {
 		String url = "/StartQuiz.jsp?id=" + questionID;
 		
 		HttpSession session = request.getSession();
+		
 		
 		
 	}
