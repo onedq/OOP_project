@@ -1,3 +1,5 @@
+<%@page import="Quiz.question"%>
+<%@page import="Quiz.QuestionDao"%>
 <%@page import="Account.accountDao"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.util.Date"%>
@@ -22,6 +24,9 @@
 	
 	accountDao acc = (accountDao)cont.getAttribute("manager");
 	String username = (String)request.getSession().getAttribute("username");
+	
+	QuestionDao quest = (QuestionDao)cont.getAttribute("Question");
+	ArrayList<question> arr = quest.getAllQuestion(con);
 %>
 
 </head>
@@ -46,8 +51,17 @@
 			
 		</form>
 		
-		
 		<%
+		
+		for(int i=0; i<arr.size(); i++){
+			%>
+			
+			<h1><%= arr.get(i).getTitle() %></h1>
+			
+			<%
+		}
+		
+		
 	} else{
 		%>
 		
