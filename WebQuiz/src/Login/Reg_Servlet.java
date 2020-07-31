@@ -14,16 +14,16 @@ import javax.servlet.http.HttpServletResponse;
 import Account.accountDao;
 
 /**
- * Servlet implementation class Login_Servlet
+ * Servlet implementation class Reg_Servlet
  */
-@WebServlet("/Login/Login_Servlet")
-public class Login_Servlet extends HttpServlet {
+@WebServlet("/Login/Reg_Servlet")
+public class Reg_Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login_Servlet() {
+    public Reg_Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +33,6 @@ public class Login_Servlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
 	}
 
 	/**
@@ -48,24 +47,38 @@ public class Login_Servlet extends HttpServlet {
 		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String first_name = request.getParameter("first_name");
+		String last_name = request.getParameter("last_name");
+		String mail = request.getParameter("mail");
 		
 		DataBase.DateBaseManager d = (DataBase.DateBaseManager)cont.getAttribute("baseManager");
 	    
 		Connection con = d.getConnection();
 		
-		int login = acc.checkPassword(username, password, con);
+		int accountIsTaken = acc.containsAccount(username, mail, con);
+		boolean error = false;
 		
-		if(login==0) {
+		if(accountIsTaken==0) {
 			// success
-			request.getSession().setAttribute("username", username);
-			RequestDispatcher dispatch = request.getRequestDispatcher("/index.jsp");
-			dispatch.forward(request, response);
-		} else {
-			// failure
+			
+			if(password.length() < 4 || mail.length() < 4) {
+				error = true;
+			} else {
+				acc.addNewAccount(first_name, last_name, username, password, mail, con);
+				request.getSession().setAttribute("username", username);
+				RequestDispatcher dispatch = request.getRequestDispatcher("/index.jsp");
+				dispatch.forward(request, response);
+			}
+		}else {
+			error = true;
+		}
+		
+		if(error){
+			// mail or username is taken
+			// pass < 4 or mail <4
 			RequestDispatcher dispatch = request.getRequestDispatcher("/error.jsp");
 			dispatch.forward(request, response);
 		}
-		
 	}
 
 }

@@ -39,12 +39,20 @@
 		<h1><%= username %></h1>
 		
 		
+		
+		<form action="/WebQuizProject/Login/Logout_Servlet" method="POST">
+
+			<label> <input value="Logout" type="submit"></label>
+			
+		</form>
+		
+		
 		<%
 	} else{
 		%>
 		
 		
-		<form action="Login/Login_Servlet" method="POST">
+		<form action="/WebQuizProject/Login/Login_Servlet" method="POST">
 					
 			<table>
 			<tbody>
@@ -71,7 +79,11 @@
 				
 			<label> <input value="Login" type="submit"></label>
 			
-		</form>	
+		</form>
+		
+		<div>
+			<a href="/WebQuizProject/registration.jsp"> Registration </a>
+		</div>
 		
 		
 		<%
